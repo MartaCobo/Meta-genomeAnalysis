@@ -66,8 +66,8 @@ my $output = $ARGV[1];
 
 
 my %kegg_proteina;
-open (my $infile, "$input" ) || die "No puedo abrir el fichero\n";
-open (my $outfile, ">$output") || die "No puedo abrir el fichero output\n";
+open (my $infile, "$input" ) || die "I cannot open the file\n";
+open (my $outfile, ">$output") || die "I cannot open the output\n";
 print $outfile "#--Created by $0, ", scalar localtime, "\n";  # Write in the file the script that produced it and the date of execution. 
 while(<$infile>) {
 	unless ( $_ =~ /\#/) {
