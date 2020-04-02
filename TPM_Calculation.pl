@@ -208,8 +208,8 @@ for ( my $i = -$numeromuestras; $i <= -1; $i++ ) {
 
 my %SampleGeneroKEGGRawcounts;
 
-# Calculation of the abundance of each function (KO, COG or PFAM) in each sample for the selected taxon. 
 
+# Calculation of the abundance of each function (KO, COG or PFAM) in each sample for the selected taxon. 
 
 foreach my $sample ( sort keys %SampleKEGGTaxaGeneRawcounts ) {
 	foreach my $genero ( sort keys %{$SampleKEGGTaxaGeneRawcounts{$sample}} ) {
@@ -230,15 +230,15 @@ my %sample_kegg_genero_medianalongitudes;
 
 foreach my $sample ( sort keys %sample_kegg_genero_orf_length ) {
 	foreach my $kegg ( sort keys %{$sample_kegg_genero_orf_length{$sample}} ) {
-        foreach my $genero ( sort keys %{$sample_kegg_genero_orf_length{$sample}{$kegg}} ) {
-            my @longitudes = ();
-            foreach my $orf ( sort keys %{$sample_kegg_genero_orf_length{$sample}{$kegg}{$genero}} ) {
-                push @longitudes, $sample_kegg_genero_orf_length{$sample}{$kegg}{$genero}{$orf};
-            }
-            my $medianalongitudes = median (@longitudes);
-            $sample_kegg_genero_medianalongitudes{$sample}{$kegg}{$genero} = $medianalongitudes;
+        	foreach my $genero ( sort keys %{$sample_kegg_genero_orf_length{$sample}{$kegg}} ) {
+            		my @longitudes = ();
+            		foreach my $orf ( sort keys %{$sample_kegg_genero_orf_length{$sample}{$kegg}{$genero}} ) {
+               		 	push @longitudes, $sample_kegg_genero_orf_length{$sample}{$kegg}{$genero}{$orf};
+            		}
+            		my $medianalongitudes = median (@longitudes);
+            		$sample_kegg_genero_medianalongitudes{$sample}{$kegg}{$genero} = $medianalongitudes;
 		}
-    }
+    	}
 }
 
 
@@ -248,20 +248,22 @@ my %sample_genero_kegg_tpm;
 my %sample_genero_kegg_abundancianormalizadalongitud;
 my %sample_genero_total;
 
+
 # Abundancies normalized by KO, COG or PFAM length.
 
 foreach my $sample ( sort keys %SampleGeneroKEGGRawcounts ) {
 	if ( defined $muestras{$sample} ) {
-        foreach my $genero ( sort keys %{$SampleGeneroKEGGRawcounts{$sample}} ) {
-            foreach my $kegg ( sort keys %{$SampleGeneroKEGGRawcounts{$sample}{$genero}} ) {
+       		foreach my $genero ( sort keys %{$SampleGeneroKEGGRawcounts{$sample}} ) {
+            		foreach my $kegg ( sort keys %{$SampleGeneroKEGGRawcounts{$sample}{$genero}} ) {
 	    
-	    	# Longitud kegg por muestra.
-                my $abundancianormalizadalongitud = $SampleGeneroKEGGRawcounts{$sample}{$genero}{$kegg} * 1000 / 
-		$sample_kegg_genero_medianalongitudes{$sample}{$kegg}{$genero}; 
+	    			# Longitud kegg por muestra.
+               			my $abundancianormalizadalongitud = $SampleGeneroKEGGRawcounts{$sample}{$genero}{$kegg} * 1000 / 
+				$sample_kegg_genero_medianalongitudes{$sample}{$kegg}{$genero}; 
 		
-		$sample_genero_kegg_abundancianormalizadalongitud{$sample}{$genero}{$kegg} = $abundancianormalizadalongitud;
-            }
-        }
+				$sample_genero_kegg_abundancianormalizadalongitud{$sample}{$genero}{$kegg} = 
+				$abundancianormalizadalongitud;
+           		}
+       		}
 	}
 }
 
@@ -307,6 +309,7 @@ foreach my $genero ( sort keys %sample_genero_kegg_tpm) {
 	}
 	close $outfile;
 }
+
 
 # Function to calculate the median.
 
