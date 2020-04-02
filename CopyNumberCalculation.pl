@@ -43,7 +43,9 @@ This script calculates the copy number of different functions (KO, COG, PFAM) of
 	
 Author:
 
-Marta Cobo Simón
+Marta Cobo Simón, 2020
+
+Doctoral thesis "Ecology of marine microorganisms: biodiversity, genomics and metagenomics".
 
 
 
