@@ -1,13 +1,20 @@
 #!/usr/bin/python3.5
 
+"""
 
-# This program join abundances of KOs in different samples and metadata from the samples.
+Part of the doctoral thesis "Ecology of marine microorganisms: biodiversity, genomics and metagenomics". 02/04/2020 Original version,
 
-# Usage: Change the paths of abundances table, metadata and outfile. 
+                            (c) Marta Cobo-Simón, CNB-CSIC.
 
-# Author: Marta Cobo Simón, 2020
 
-# Doctoral thesis "Ecology of marine microorganisms: biodiversity, genomics and metagenomics".
+
+This program join abundances of KOs in different samples and metadata from the samples.
+
+Usage: Change the paths of abundances table, metadata and outfile. 
+
+
+"""
+
 
 
  
