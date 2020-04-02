@@ -46,7 +46,8 @@ my $USAGE=<<"USAGE" ;
 	Third parameter: Interval used in x axis
 	Fourth parameter: Number of rows in the file to organize the plots.
 	Fifth parameter: Number of columns in the file to organize the plots. 
-	Sixth parameter: legend position in the file (outside the plot) (top/right/left/bottom/center/topleft/topright/bottomleft/bottomright)
+	Sixth parameter: legend position in the file (outside the plot) (top/right/left/bottom/center/topleft/topright/bottomleft
+	/bottomright)
 
 	perl $PROGNAME <functional_class> <xlim> <interval> <rows> <columns> <legend_position>
  
@@ -82,9 +83,11 @@ my $height = 4 * $rows;  # Heigth of the file containing the plots.
 my $width = 4 * $columns; # Width of the file containing the plots. 
 
 
+# Path of the infile files.
+my $path_files = "/media/Backup/disk1/marta/coassemblylonghurstjuntos/Pelagibacterales/Masmuestras0.7nuevosilva/kegg/transportadores/estacionlista4";
 
-my $path_files = "/media/Backup/disk1/marta/coassemblylonghurstjuntos/Pelagibacterales/Masmuestras0.7nuevosilva/kegg/transportadores/estacionlista4";  # Path of the infile files.
-my $path_plots = "/media/Backup/disk1/marta/coassemblylonghurstjuntos/Pelagibacterales/Masmuestras0.7nuevosilva/kegg/transportadores/plotestacionlista4"; # Path of the output files.
+# Path of the output files.
+my $path_plots = "/media/Backup/disk1/marta/coassemblylonghurstjuntos/Pelagibacterales/Masmuestras0.7nuevosilva/kegg/transportadores/plotestacionlista4"; 
 
 opendir(my $indir,$path_files); 
 my @dirs=readdir $indir;  # Read the files in the directory indicated by the path and introduce them in the array @dirs. 
