@@ -23,7 +23,8 @@ muestras = [];
 
 # Read the table of KOs abundances in different samples in wide format and introduce the data into a dictionary.
 
-with open('/home/marta/Desktop/Perl/Metagenomas_tesis/Pipeline/hipervariablesMADsdataframe.txt') as infile: # Rows: genes. Columns: samples.
+# Rows: genes. Columns: samples.
+with open('/home/marta/Desktop/Perl/Metagenomas_tesis/Pipeline/hipervariablesMADsdataframe.txt') as infile:
     for line in infile:
         if 'MP' in line:
             muestras = line.strip().split('\t')
