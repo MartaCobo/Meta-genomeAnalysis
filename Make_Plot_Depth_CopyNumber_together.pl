@@ -51,13 +51,7 @@ my $USAGE=<<"USAGE" ;
  Example:
  
 	perl $PROGNAME irondepthvariation 6 2 4 3 bottom
-	
-	
-Author:
 
-Marta Cobo Simón, 2020
-
-Doctoral thesis "Ecology of marine microorganisms: biodiversity, genomics and metagenomics".
 
 
 
