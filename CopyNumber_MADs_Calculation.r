@@ -1,3 +1,7 @@
+# Part of the doctoral thesis "Ecology of marine microorganisms: biodiversity, genomics and metagenomics". 02/04/2020 Original version,
+
+#                            (c) Marta Cobo-Simón, CNB-CSIC.
+
 # This script calculates the average copy number per genome and highly-variable genes from a table of TPMs whose columns are samples and the rows are KOs or COGs. 
 
 # Usage: source("CopyNumber_MADs_Calculation.R"). Choose the Universal Single Copy Genes (singleCopy) in KO or COG. 
@@ -11,9 +15,7 @@
 # The variable foldchangeusicgsintersample contains the log2(foldchange) of USiCGs among different samples.
 # The variable foldchangeusicgsintrasample contains the log2(foldchange) of USiCGs in each sample. 
 
-# Author: Marta Cobo Simón, 2020
 
-# Doctoral thesis "Ecology of marine microorganisms: biodiversity, genomics and metagenomics".
 
 peleae10 = read.table("tablasjuntasordenado.txt",header=T,sep="\t",row.names=1)
 
