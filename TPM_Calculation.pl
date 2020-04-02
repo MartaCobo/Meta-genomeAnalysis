@@ -169,16 +169,32 @@ for ( my $i = -$numeromuestras; $i <= -1; $i++ ) {
 						my $orf = $lista2[0];
 						my $contig = $lista2[1];
 						my $rawcounts = $lista2[$i]; 
-						if (( $keggstring =~ /\*/) && ( $rawcounts ne "") && ($rawcounts ne "0") && ($rawcounts ne "0.000") && ( @keggs) && ( $sample ne "" ) && ( $lengthorf ne "" ) && ( $taxonomiacompleta ne "" ) && ( $orf ne "")) { # best average
+						
+						# Best average.
+						if (( $keggstring =~ /\*/) && ( $rawcounts ne "") && ($rawcounts ne "0") && 
+						($rawcounts ne "0.000") && ( @keggs) && ( $sample ne "" ) && ( $lengthorf ne "" ) && 
+						( $taxonomiacompleta ne "" ) && ( $orf ne "")) {
+						
 							my $numero = scalar (@keggs);
-							my $newrawcounts = $rawcounts / scalar (@keggs); # Since one gene can be assigned to two or more KOs, the raw reads are divided by the number of KOs. 
+							
+							# Since one gene can be assigned to two or more KOs, the raw reads are divided by
+							# the number of KOs. 
+							my $newrawcounts = $rawcounts / scalar (@keggs); 
 							if (( $taxonomiacompleta =~ /$generoescogido/) or ( defined $contigs{$contig})) {
 								my $genero = "$generoescogido";
 								foreach my $kegg ( @keggs ) {
-									$kegg =~ s/\*//; # Only KOs, COGs or PFAMs assigned with best average algorithm (SqueezeMeta), marked by '*', are recovered. The '*' is removed. 
-									$SampleKEGGTaxaGeneRawcounts{$sample}{$genero}{$kegg}{$orf} = $newrawcounts;
-									my $lengthorfgen = 3 * $lengthorf; # Calculation of gene length from protein length.
-									$sample_kegg_genero_orf_length{$sample}{$kegg}{$genero}{$orf} = $lengthorfgen;
+								
+									# Only KOs, COGs or PFAMs assigned with best average algorithm 
+									# (SqueezeMeta), marked by '*', are recovered. The '*' is removed. 
+									$kegg =~ s/\*//; 
+									
+									$SampleKEGGTaxaGeneRawcounts{$sample}{$genero}{$kegg}{$orf} = 
+									$newrawcounts;
+									
+									# Calculation of gene length from protein length.
+									my $lengthorfgen = 3 * $lengthorf;
+									$sample_kegg_genero_orf_length{$sample}{$kegg}{$genero}{$orf} = 
+									$lengthorfgen;
 								}
 							}
 						}
@@ -238,8 +254,12 @@ foreach my $sample ( sort keys %SampleGeneroKEGGRawcounts ) {
 	if ( defined $muestras{$sample} ) {
         foreach my $genero ( sort keys %{$SampleGeneroKEGGRawcounts{$sample}} ) {
             foreach my $kegg ( sort keys %{$SampleGeneroKEGGRawcounts{$sample}{$genero}} ) {
-                my $abundancianormalizadalongitud = $SampleGeneroKEGGRawcounts{$sample}{$genero}{$kegg} * 1000 / $sample_kegg_genero_medianalongitudes{$sample}{$kegg}{$genero}; # longitud kegg por muestra
-				$sample_genero_kegg_abundancianormalizadalongitud{$sample}{$genero}{$kegg} = $abundancianormalizadalongitud;
+	    
+	    	# Longitud kegg por muestra.
+                my $abundancianormalizadalongitud = $SampleGeneroKEGGRawcounts{$sample}{$genero}{$kegg} * 1000 / 
+		$sample_kegg_genero_medianalongitudes{$sample}{$kegg}{$genero}; 
+		
+		$sample_genero_kegg_abundancianormalizadalongitud{$sample}{$genero}{$kegg} = $abundancianormalizadalongitud;
             }
         }
 	}
@@ -263,7 +283,9 @@ foreach my $sample ( sort keys %sample_genero_kegg_abundancianormalizadalongitud
 foreach my $sample ( sort keys %sample_genero_kegg_abundancianormalizadalongitud ) {
         foreach my $genero ( sort keys %{$sample_genero_kegg_abundancianormalizadalongitud{$sample}} ) {
 		foreach my $kegg (  sort keys %{$sample_genero_kegg_abundancianormalizadalongitud{$sample}{$genero}} ) {
-			my $tpm = $sample_genero_kegg_abundancianormalizadalongitud{$sample}{$genero}{$kegg} * 1000000 / $sample_genero_total{$sample}{$genero};
+			my $tpm = $sample_genero_kegg_abundancianormalizadalongitud{$sample}{$genero}{$kegg} * 1000000 / 
+			$sample_genero_total{$sample}{$genero};
+			
 			$sample_genero_kegg_tpm{$genero}{$kegg}{$sample} = $tpm;
 		}
 	}
@@ -273,7 +295,10 @@ foreach my $sample ( sort keys %sample_genero_kegg_abundancianormalizadalongitud
 
 foreach my $genero ( sort keys %sample_genero_kegg_tpm) {
 	open( my $outfile, ">$outputpath/TPM_$genero.txt") || die "No puedo abrir el fichero output2\n";
-	print $outfile "#--Created by $0, ", scalar localtime, "\n";  # Write in the file the script that produced it and the date of execution. 
+	
+	# Write in the file the script that produced it and the date of execution. 
+	print $outfile "#--Created by $0, ", scalar localtime, "\n";  
+	
 	print $outfile "KO\tSample\tTPM\n";
 	foreach my $kegg ( sort keys %{$sample_genero_kegg_tpm{$genero}} ) {
 		foreach my $sample ( sort keys %{$sample_genero_kegg_tpm{$genero}{$kegg}} ) {
