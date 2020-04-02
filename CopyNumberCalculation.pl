@@ -16,6 +16,10 @@ my $USAGE=<<"USAGE" ;
 
 
 
+Part of the doctoral thesis "Ecology of marine microorganisms: biodiversity, genomics and metagenomics". 02/04/2020 Original version,
+
+                            (c) Marta Cobo-Simón, CNB-CSIC.
+
 This script calculates the copy number of different functions (KO, COG, PFAM) of complete genomes from PATRIC database. It requires the output of the program fun3.pl
 
  
@@ -39,13 +43,6 @@ This script calculates the copy number of different functions (KO, COG, PFAM) of
  Example:
  
 	perl $PROGNAME </home/Ecoli.fun3.txt> </home/Ecoli.copynumber.txt>
-	
-	
-Author:
-
-Marta Cobo Simón, 2020
-
-Doctoral thesis "Ecology of marine microorganisms: biodiversity, genomics and metagenomics".
 
 
 
