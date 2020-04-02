@@ -16,6 +16,10 @@ my $USAGE=<<"USAGE" ;
 
 
 
+ Part of the doctoral thesis "Ecology of marine microorganisms: biodiversity, genomics and metagenomics". 02/04/2020 Original version,
+
+                            (c) Marta Cobo-Simón, CNB-CSIC.
+ 
  This script creates scatterplots to relate the average copy number per genome of different functions from metagenomes to the sample depth. All the plots are located to the same file. Files must contain the function, the sample and the copy number. Files names must contain the functional class (nutrient in this case) and the station. 
 
  File name: ironlowaffinityestacion19
