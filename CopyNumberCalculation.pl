@@ -20,7 +20,8 @@ Part of the doctoral thesis "Ecology of marine microorganisms: biodiversity, gen
 
                             (c) Marta Cobo-Simón, CNB-CSIC.
 
-This script calculates the copy number of different functions (KO, COG, PFAM) of complete genomes from PATRIC database. It requires the output of the program fun3.pl
+This script calculates the copy number of different functions (KO, COG, PFAM) of complete genomes from PATRIC database. 
+It requires the output of the program fun3.pl
 
  
  File format (example):
