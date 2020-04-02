@@ -22,18 +22,24 @@ my $USAGE=<<"USAGE" ;
 
                             (c) Marta Cobo-Simón, CNB-CSIC.
  
- This script calculates the TPM (Transcripts Per Million of reads) of KOs from metagenomes per sample and per taxon. The reason for using TPM instead of RPKM is that the sum of all TPMs in each sample are the same. This makes it easier to compare the proportion of reads that mapped to a gene in each sample. In contrast, with RPKM and FPKM, the sum of the normalized reads in each sample may be different, and this makes it harder to compare samples directly.
+ This script calculates the TPM (Transcripts Per Million of reads) of KOs from metagenomes per sample and per taxon. The reason for 
+ using TPM instead of RPKM is that the sum of all TPMs in each sample are the same. This makes it easier to compare the proportion of 
+ reads that mapped to a gene in each sample. In contrast, with RPKM and FPKM, the sum of the normalized reads in each sample may be 
+ different, and this makes it harder to compare samples directly.
  
  It requires: 
 	- The following output files from SqueezeMeta (Tamames & Puente-Sánchez, 2019):
 		- The file .orftable
 		- The file .contiglog
-	- A file with the selected samples to analyze, one sample in each row. Recommendation: use the samples where the selected taxa is abundant, for example, higher than 0.7% of the sample. Example:
+	- A file with the selected samples to analyze, one sample in each row. 
+	Recommendation: use the samples where the selected taxa is abundant, for example, higher than 0.7% of the sample. 
+	Example:
 		MP0311
 		MP0313
 		MP0321
 		
-	The result is a file called TPM_<selected_taxon>.txt, consisting on a table in long format saved in the output path selected, which contains the KO, the sample and the TPM. 
+	The result is a file called TPM_<selected_taxon>.txt, consisting on a table in long format saved in the output path selected, 
+	which contains the KO, the sample and the TPM. 
 		
 		KO	Sample	TPM
 		K02010	MP0311	3000
@@ -55,7 +61,8 @@ my $USAGE=<<"USAGE" ;
  
  Example:
  
-	perl $PROGNAME Pelagibacterales SamplesPelagibacterales.txt 12.coassembly.orftable 08.coassembly.contiglog /home/mcobo province10.samples kegg
+	perl $PROGNAME Pelagibacterales SamplesPelagibacterales.txt 12.coassembly.orftable 08.coassembly.contiglog /home/mcobo 
+	province10.samples kegg
 
 
 
@@ -93,7 +100,8 @@ while(<$infile>) {
 close $infile;
 
 
-# Selection from .contiglog of those contigs assigned to the selected taxon. They will be used to recover genes whose contig is assigned to the chosen taxon although the gene was not assigned. 
+# Selection from .contiglog of those contigs assigned to the selected taxon. They will be used to recover genes whose contig is assigned
+# to the chosen taxon although the gene was not assigned. 
 
 my %contigs;
 open (my $infile2, "$contigstable") || die "I cannot open the .contiglog file\n";
@@ -109,7 +117,8 @@ while(<$infile2>) {
 
 close $infile2;
 
-# From the .orftable, selection of the raw counts (number of reads mapped against one particular gene predicted from the assembly of the metagenome(s)). Select the genes assigned to the selected taxon or the genes whose contig is assigned to the selected taxon. 
+# From the .orftable, selection of the raw counts (number of reads mapped against one particular gene predicted from the assembly of the
+# metagenome(s)). Select the genes assigned to the selected taxon or the genes whose contig is assigned to the selected taxon. 
 
 my $numerofilas = 0;
 open (my $infile3, "$ficheromuestras") || die "I cannot open the .samples file\n";
