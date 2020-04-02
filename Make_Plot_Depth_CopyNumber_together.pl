@@ -20,7 +20,9 @@ my $USAGE=<<"USAGE" ;
 
                             (c) Marta Cobo-Simón, CNB-CSIC.
  
- This script creates scatterplots to relate the average copy number per genome of different functions from metagenomes to the sample depth. All the plots are located to the same file. Files must contain the function, the sample and the copy number. Files names must contain the functional class (nutrient in this case) and the station. 
+ This script creates scatterplots to relate the average copy number per genome of different functions from metagenomes to the sample 
+ depth. All the plots are located to the same file. Files must contain the function, the sample and the copy number. Files names must 
+ contain the functional class (nutrient in this case) and the station. 
 
  File name: ironlowaffinityestacion19
  
@@ -88,17 +90,21 @@ opendir(my $indir,$path_files);
 my @dirs=readdir $indir;  # Read the files in the directory indicated by the path and introduce them in the array @dirs. 
 closedir $indir;
 
-# This script uses R to make the plots. To do that, it creates a file where all the commands for R will be written and, at the end, executes the commands in R. 
+# This script uses R to make the plots. To do that, it creates a file where all the commands for R will be written and, at the end, 
+# executes the commands in R. 
 
 open (my $outfile, ">$path_plots/matrix") || die "I cannot open the outfile\n"; # Create a file where the commands for R will be written.  
 print $outfile "#--Created by $0, ", scalar localtime, "\n";  # Write in the file the script that produced it and the date of execution. 
-print $outfile "svg(\"$path_plots/$nutriente.svg\", width=$width, height=$height)\n"; # File with the plots, the width and the height are established. 
+
+# File with the plots, the width and the height are established. 
+print $outfile "svg(\"$path_plots/$nutriente.svg\", width=$width, height=$height)\n"; 
+
 print $outfile "par(mfrow=c($rows,$columns))\n"; # Number of rows and columns of the plots file. 
-print $outfile "par(oma = c(5, 5, 1, 1))\n"; # make room (i.e. the 4's) for the overall x and y axis titles
-print $outfile "par(mar = c(2, 2, 1, 1))\n"; # make the plots be closer together
+print $outfile "par(oma = c(5, 5, 1, 1))\n"; # Make room (i.e. the 4's) for the overall x and y axis titles.
+print $outfile "par(mar = c(2, 2, 1, 1))\n"; # Make the plots be closer together.
 my $numero = length($nutriente);
 my $numerototal = $numero + 8;
-foreach my $mydir(sort { substr(my $a, $numerototal) <=> substr(my $b, $numerototal)  } @dirs) { # Sort the files by the station number
+foreach my $mydir(sort { substr(my $a, $numerototal) <=> substr(my $b, $numerototal)  } @dirs) { # Sort the files by the station number.
 	if ( $mydir =~ /$nutriente/ ) { 
 		my @nombre = split(/$nutriente/, $mydir);
 		my $nombrebonito = $nombre[1];
@@ -111,7 +117,12 @@ foreach my $mydir(sort { substr(my $a, $numerototal) <=> substr(my $b, $numeroto
 		print $outfile "copynumberkegg <- keggnuevo\$copynumber\n";
 		print $outfile "names(copynumberkegg) = keggnuevo\$sample\n";
 		print $outfile "par(mai=c(0.3,0.6,0.5,0.1))\n";
-		print $outfile "plot(keggnuevo\$copynumber, keggnuevo\$sample, lwd = 3, col=colores[1], type=\"b\", ylim = rev(c(0, 4000)), xlim = c(0,$xlim), main = \"$nombrebonito\", xaxt=\'n\', las=1, cex.axis=1.5, ylab = \"\", xlab = \"\", cex.main=2)\n"; # First line in the plot, corresponding to the first function, without x axis.
+		
+		# First line in the plot, corresponding to the first function, without x axis.
+		print $outfile "plot(keggnuevo\$copynumber, keggnuevo\$sample, lwd = 3, col=colores[1], type=\"b\","; 
+		print $outfile "ylim = rev(c(0, 4000)), xlim = c(0,$xlim), main = \"$nombrebonito\", xaxt=\'n\', las=1, cex.axis=1.5,"; 
+		print $outfile "ylab = \"\", xlab = \"\", cex.main=2)\n"; 
+		
 		print $outfile "labels<-seq(from = 0, to = $xlim, by = $interval)\n";
 		print $outfile "axis(1, at=labels,labels=labels, cex.axis=1.5)\n"; # Set the x axis.
 		print $outfile "for (i in 1:length(unique(lista\$kegg))) {\n";
@@ -119,19 +130,33 @@ foreach my $mydir(sort { substr(my $a, $numerototal) <=> substr(my $b, $numeroto
 		print $outfile "keggnuevo <- subset(lista, subset=lista\$kegg==lista\$kegg[i])\n";
 		print $outfile "copynumberkegg <- keggnuevo\$copynumber\n";
 		print $outfile "names(copynumberkegg) = keggnuevo\$sample\n";
-		print $outfile "plot(keggnuevo\$copynumber, keggnuevo\$sample, lwd = 3, col=colores[i], type=\"b\", ylim = rev(c(0, 4000)), xlim = c(0,$xlim), xaxt='n', yaxt='n', xlab=\"\", ylab=\"\")\n"; # Add new lines to the same plot, corresponding to the rest of the functions. 
+		
+		# Add new lines to the same plot, corresponding to the rest of the functions. 
+		print $outfile "plot(keggnuevo\$copynumber, keggnuevo\$sample, lwd = 3, col=colores[i], type=\"b\","; 
+		print $outfile "ylim = rev(c(0, 4000)), xlim = c(0,$xlim), xaxt='n', yaxt='n', xlab=\"\", ylab=\"\")\n"; 
+		
 		print $outfile "}\n";
 	}
 }
 
-print $outfile "mtext(\"Average copy number per genome\", side = 1, outer = TRUE, line = 1.5, cex=1.5)\n"; # Text for the global x axis (whole file).
+# Text for the global x axis (whole file).
+print $outfile "mtext(\"Average copy number per genome\", side = 1, outer = TRUE, line = 1.5, cex=1.5)\n";
+
 print $outfile "mtext(\"Depth (m)\", side = 2, outer = TRUE, line = 1.5, cex=1.5)\n"; # Test for the global y axis (whole file).
-print $outfile "par(fig = c(0, 1, 0, 1), oma = c(0, 0, 0, 0), mar = c(0, 0, 0, 0), new = TRUE)\n"; # Set the position of the plots in the file. 
+
+# Set the position of the plots in the file. 
+print $outfile "par(fig = c(0, 1, 0, 1), oma = c(0, 0, 0, 0), mar = c(0, 0, 0, 0), new = TRUE)\n";
+
 print $outfile "plot(0, 0, type = \"n\", bty = \"n\", xaxt = \"n\", yaxt = \"n\")\n";
-print $outfile "legend(\"$legend_position\", legend = unique(lista\$kegg), xpd = TRUE, inset = c(9, 0.08), bty = \"n\", col = colores, cex = 2, title=\"Genes\", lwd=3, ncol=1)\n"; # Legend
+
+print $outfile "legend(\"$legend_position\", legend = unique(lista\$kegg), xpd = TRUE, inset = c(9, 0.08), bty = \"n\", col = colores,"; 
+print $outfile "cex = 2, title=\"Genes\", lwd=3, ncol=1)\n"; # Legend
+
 print $outfile "dev.off()\n";
 close $outfile;
-system("R --slave --no-save --no-restore --no-environ --silent < $path_plots/matrix > $path_plots/plot"); # Send the file with the commands to R. 
+
+# Send the file with the commands to R. 
+system("R --slave --no-save --no-restore --no-environ --silent < $path_plots/matrix > $path_plots/plot");
 
 }
 
