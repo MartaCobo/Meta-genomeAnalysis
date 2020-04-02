@@ -18,6 +18,10 @@ my $USAGE=<<"USAGE" ;
 
 
 
+ Part of the doctoral thesis "Ecology of marine microorganisms: biodiversity, genomics and metagenomics". 02/04/2020 Original version,
+
+                            (c) Marta Cobo-Simón, CNB-CSIC.
+ 
  This script calculates the TPM (Transcripts Per Million of reads) of KOs from metagenomes per sample and per taxon. The reason for using TPM instead of RPKM is that the sum of all TPMs in each sample are the same. This makes it easier to compare the proportion of reads that mapped to a gene in each sample. In contrast, with RPKM and FPKM, the sum of the normalized reads in each sample may be different, and this makes it harder to compare samples directly.
  
  It requires: 
@@ -52,13 +56,7 @@ my $USAGE=<<"USAGE" ;
  Example:
  
 	perl $PROGNAME Pelagibacterales SamplesPelagibacterales.txt 12.coassembly.orftable 08.coassembly.contiglog /home/mcobo province10.samples kegg
-	
-	
-Author:
 
-Marta Cobo Simón, 2020
-
-Doctoral thesis "Ecology of marine microorganisms: biodiversity, genomics and metagenomics".
 
 
 
