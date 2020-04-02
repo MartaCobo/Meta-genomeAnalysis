@@ -16,6 +16,10 @@ my $USAGE=<<"USAGE" ;
 
 
 
+ Part of the doctoral thesis "Ecology of marine microorganisms: biodiversity, genomics and metagenomics". 02/04/2020 Original version,
+
+                            (c) Marta Cobo-Simón, CNB-CSIC.
+ 
  This script calculates the copy number of KOs in complete genomes from PATRIC database. It requires FASTA files of the complete genomes.
  
 
@@ -28,13 +32,7 @@ my $USAGE=<<"USAGE" ;
  Example:
  
 	perl $PROGNAME /home/genomes
-	
-	
-Author:
 
-Marta Cobo Simón, 2020
-
-Doctoral thesis "Ecology of marine microorganisms: biodiversity, genomics and metagenomics".
 
 
 
