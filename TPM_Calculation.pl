@@ -3,7 +3,6 @@
 use strict;
 use warnings;
 
-# Hace plots con R de los ficheros. 
 
 my $PROGNAME = "TPM_Calculation.pl";
 my $VERSION = "1.0";
@@ -57,7 +56,9 @@ my $USAGE=<<"USAGE" ;
 	
 Author:
 
-Marta Cobo Simón
+Marta Cobo Simón, 2020
+
+Doctoral thesis "Ecology of marine microorganisms: biodiversity, genomics and metagenomics".
 
 
 
