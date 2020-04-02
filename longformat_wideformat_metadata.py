@@ -5,7 +5,9 @@
 
 # Usage: Change the paths of abundances table, metadata and outfile. 
 
-# Author: Marta Cobo Simón
+# Author: Marta Cobo Simón, 2020
+
+# Doctoral thesis "Ecology of marine microorganisms: biodiversity, genomics and metagenomics".
 
 
  
@@ -51,6 +53,5 @@ for kegg in MuestraKEGGAbundancia:
     outputfile.write('{}\t{}\t{}\t{}\n'.format('muestra','cuenta','profundidad','metadato'))
     for muestra in MuestraKEGGAbundancia[kegg]:
         outputfile.write('{}\t{}\t{}\t{}\n'.format(muestra,MuestraKEGGAbundancia[kegg][muestra],MuestraDepth[muestra],MuestraMetadata[muestra]))
-        #print (muestra + '\t' + kegg + '\t' + MuestraKEGGAbundancia[kegg][muestra] + '\t' + MuestraDepth[muestra] + '\t' + MuestraMetadata[muestra]) 
         
 
