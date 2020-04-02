@@ -32,7 +32,9 @@ my $USAGE=<<"USAGE" ;
 	
 Author:
 
-Marta Cobo Simón
+Marta Cobo Simón, 2020
+
+Doctoral thesis "Ecology of marine microorganisms: biodiversity, genomics and metagenomics".
 
 
 
