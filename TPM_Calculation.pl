@@ -59,9 +59,9 @@ my $USAGE=<<"USAGE" ;
 	samples_file: File .samples from SqueezeMeta (Tamames & Puente-Sánchez, 2019).
 	keggcog: Functional annotation based on kegg, cog or pfam. Options: kegg/cog/pfam.
  
- Example:
+ Example/Test:
  
-	perl $PROGNAME Pelagibacterales SamplesPelagibacterales.txt 12.coassembly.orftable 08.coassembly.contiglog /home/mcobo 
+	perl $PROGNAME Pelagibacterales SamplesPelagibacterales.txt 12.coassemblyresults.orftable 08.coassemblyresults.contiglog /home/mcobo 
 	province10.samples kegg
 
 
