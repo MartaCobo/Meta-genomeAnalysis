@@ -28,9 +28,11 @@
 
 # The variable foldchangeusicgsintrasample contains the log2(foldchange) of USiCGs in each sample. 
 
+# Test: test_CopyNumber_MADs_Calculation.txt as table of TPMs.
 
 
-peleae10 = read.table("tablasjuntasordenado.txt",header=T,sep="\t",row.names=1)
+# Read the table of TPMs.
+peleae10 = read.table("test_CopyNumber_MADs_Calculation.txt",header=T,sep="\t",row.names=1)
 
 
 # Select which group of USiCGs must be used.
@@ -94,24 +96,28 @@ foldchangeusicgsintrasample <- apply(usicgspeleae10, 2, function(x) log2(max(x+0
 # Plot with variation in copy number of USiCGs in each sample and copy number of highly-variable genes. 
 
 png("Highly-Variable.png", width = 7*300,height = 7*300,res = 300,pointsize = 6)
-colores = c("cadetblue2","red", "yellow", "orange", "green", "purple", "blue", "grey", "black", "pink", "brown", "olivedrab3", 
-	    "violetred3", "cyan4", "burlywood2", "chocolate1", "coral2", "cadetblue1","palegreen1","palegreen2","palegreen3",
-	    "palegreen4","paleturquoise","paleturquoise1","paleturquoise2","paleturquoise3","paleturquoise4","palevioletred",
-	    "palevioletred1","palevioletred2","palevioletred3","palevioletred4","papayawhip","peachpuff1","peachpuff2","peachpuff3",
-	    "peachpuff4","peru","slategray4")                                
-colores2 = c("red", "yellow", "orange", "green", "purple", "blue", "grey", "black", "pink", "brown", "olivedrab3")				   
+colores <- c('#97B065', '#B93838', '#83AAF0', '#E2AA48', '#A9A3D2','#797900', '#F4BCE6', '#84F4F6', '#9AD63B', '#A285F5','#D2B48C', 
+	'#4EA24E', '#465569','#9C669C', '#6495ED')                                				   
 cogshipervariables <- hipervariables$cog
 cogshipervariablesordenado <- sort(cogshipervariables)
 cogshipervariablesordenadosinduplicados <- cogshipervariablesordenado[!duplicated(cogshipervariablesordenado)]
-plot(listausicgspelae10reducido$rpkm ~ listausicgspelae10reducido$muestra, ylim=c(0,8), col="blue", xlab= "Samples", 
-     ylab = "Copy number", las = 3, tcl = 1)
-	for (i in 1:length(unique(cogshipervariables))) {
+par(mar=c(9,9,9,9)+0.1,mgp=c(6,1,0))
+plot(listausicgspelae10reducido$rpkm ~ listausicgspelae10reducido$muestra, ylim=c(0,9), lwd = 1, col="cornflowerblue", xlab= "Samples", 
+	 ylab = "Average copy number per genome", tcl = 1, xaxt='n', cex.axis=2, cex.lab=2, las=1)
+axis(1, at=1:length(unique(hipervariables$muestra)), labels = FALSE)
+labels<-unique(hipervariables$muestra)
+text(x=1:length(unique(hipervariables$muestra)), y=par("usr")[3]-0.2,labels=labels, srt=45, adj=1, xpd=TRUE, cex=1.5)
+for (i in 1:length(unique(cogshipervariables))) {
 	par(new=T)
 	cog <- cogshipervariablesordenadosinduplicados[i]
 	cognuevo <- subset(hipervariables, subset=hipervariables$cog == cogshipervariablesordenadosinduplicados[i]) 
 	logrpkm = cognuevo$rpkm
    	names(logrpkm) = cognuevo$muestra
-    	plot(1:length(logrpkm), logrpkm, ylim=c(0,8), type='l', col=colores[i], ylab = "Copy number", axes=F, xlab= "Samples", tcl = 1) 
+		plot(1:length(logrpkm), logrpkm, lwd = 2.5, ylim=c(0,9), type='l', col=colores[i], ylab = "", axes=F, xlab= "", tcl = 1, 
+		xaxt='n', yaxt='n')
+    
 }
-legend("bottomright", legend=cogshipervariablesordenadosinduplicados, pch=c(1,length(unique(cogshipervariables))), col=colores)																																																						
+legend("topright", legend=cogshipervariablesordenadosinduplicados, col=colores, lwd=2.5, ncol=1, cex=2)
+
 dev.off()
+				     
