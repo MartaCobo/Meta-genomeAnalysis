@@ -44,7 +44,11 @@ It requires the output of the program fun3.pl
  Example:
  
 	perl $PROGNAME </home/Ecoli.fun3.txt> </home/Ecoli.copynumber.txt>
+	
+	
+Test:
 
+	perl $PROGNAME <Pelagibacterales.fun3_kegg.txt> <Pelagibacterales.copynumber_kegg.txt>
 
 
 #############################################################
